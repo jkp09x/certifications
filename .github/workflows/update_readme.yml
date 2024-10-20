@@ -9,6 +9,9 @@ jobs:
   update-readme:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write # ensure the workflow has write permissions
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
