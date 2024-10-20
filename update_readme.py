@@ -34,8 +34,8 @@ def parse_filename(filename):
 
 def generate_readme(certifications):
     readme_content = "# Certifications\n\n"
-    readme_content += " | Site | Degree Type | Course | URL |\n"
-    readme_content += " | -----|-------------|--------|-----|\n"
+    readme_content += " | Site | Degree Type | Course |\n"
+    readme_content += " | -----|-------------|--------|\n"
 
     for cert in sorted(certifications):
         site, specialization, course, path = cert
@@ -46,7 +46,7 @@ def generate_readme(certifications):
 
 def update_readme():
     certifications = []
-    cert_dir = './' #'certifications'
+    cert_dir = 'certifications'
 
     for filename in os.listdir(cert_dir):
         if filename.endswith('.pdf'):
