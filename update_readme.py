@@ -37,6 +37,9 @@ def update_readme():
         if filename.endswith('.pdf'):
             site, specialization, course = parse_filename(filename)
             if site and course:
+                # Set specialization to empty string if None
+                if specialization is None:
+                    specialization = ''
                 path = os.path.join(cert_dir, filename)
                 certifications.append((site, specialization, course, path))
 
