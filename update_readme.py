@@ -4,7 +4,7 @@ import os
 import re
 
 def camel_case_to_spaces(name):
-    return re.sub(r'(?<!^)(?=[A-Z])', ' ', name)
+    return re.sub(r'(?<!^)(?<![A-Z])(?=[A-Z])', ' ', name)
 
 def parse_filename(filename):
     pattern_with_specialization = r'^(?P<site>\w+?)_(?P<specialization>[^_]+?)_(?P<course>.+)\.pdf$'
