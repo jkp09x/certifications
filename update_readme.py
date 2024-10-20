@@ -3,34 +3,19 @@
 import os
 import re
 
-# TODO: define and process files for different naming conventions
-#       1. Coursera_SpecializationName_CourseName✅
-#       2. Udacity_Nanodegree_Course
-#       3. Udacity_Course
-#           a. Coursera_CourseName
-#           b. Udacity_CourseName
-#           c. Udemy_CourseName
-def parse_Coursera_Specialization(filename):
-    pattern = r'^(?P<site>\w+)(_(?P<specialization>[^_]+))?_(?P<course>.+)\.pdf$'
-    match = re.match(pattern, filename)
+def parse_filename(filename):
+    pattern_with_specialization = r'^(?P<site>\w+?)_(?P<specialization>[^_]+?)_(?P<course>.+)\.pdf$'
+    pattern_without_specialization = r'^(?P<site>\w+?)_(?P<course>.+)\.pdf$'
+
+    match = re.match(pattern_with_specialization, filename)
     if match:
         return match.group('site'), match.group('specialization'), match.group('course')
+
+    match = re.match(pattern_without_specialization, filename)
+    if match:
+        return match.group('site'), None, match.group('course')
+
     return None, None, None
-
-def parse_Udacity_Nanodegree_Course():
-    return
-
-def parse_Coursera_course():
-    return
-
-def parse_Udacity_course():
-    return
-
-def parse_Udemy_course():
-    return
-
-def parse_filename(filename):
-    return parse_Coursera_Specialization(filename)
 
 def generate_readme(certifications):
     readme_content = "# Certifications\n\n"
