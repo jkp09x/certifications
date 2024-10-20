@@ -3,6 +3,9 @@
 import os
 import re
 
+def camel_case_to_spaces(name):
+    return re.sub(r'(?<!^)(?=[A-Z])', ' ', name)
+
 def parse_filename(filename):
     pattern_with_specialization = r'^(?P<site>\w+?)_(?P<specialization>[^_]+?)_(?P<course>.+)\.pdf$'
     pattern_without_specialization = r'^(?P<site>\w+?)_(?P<course>.+)\.pdf$'
@@ -37,11 +40,15 @@ def update_readme():
         if filename.endswith('.pdf'):
             site, specialization, course = parse_filename(filename)
             if site and course:
+                dispSite = camel_case_to_spaces(site)
+                dispCourse = camel_case_to_spaces(course)
                 # Set specialization to empty string if None
                 if specialization is None:
-                    specialization = ''
+                    dispSpecialization = ''
+                else:
+                    dispSpecialization = camel_case_to_spaces(specialization)
                 path = os.path.join(cert_dir, filename)
-                certifications.append((site, specialization, course, path))
+                certifications.append((dispSite, dispSpecialization, dispCourse, path))
 
     readme_content = generate_readme(certifications)
 
